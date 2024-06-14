@@ -6,7 +6,7 @@ import time
 query_funny_reviews = [
     {
         "$lookup": {
-            "from": "Games",
+            "from": "GamesExtendedReference",
             "localField": "review_id",
             "foreignField": "app_id",
             "as": "game_reviews",
@@ -17,7 +17,7 @@ query_funny_reviews = [
     },
     {
         "$lookup": {
-            "from": "Platform",
+            "from": "PlatformSubset",
             "localField": "game_reviews.app_id",
             "foreignField": "app_id",
             "as": "game_platform",
@@ -29,7 +29,7 @@ query_funny_reviews = [
     {
         "$match": {
             "game_reviews.positive_ratio": {"$gte": 80},
-            "game_platform.steam_deck": True,
+            "game_platform.platforms": "Steam Deck",
             "funny": {"$gt": 0},
         },
     },
@@ -51,7 +51,7 @@ query_funny_reviews = [
 query_max_hours_played = [
     {
         "$lookup": {
-            "from": "Recommendations",
+            "from": "RecommendationsBucket",
             "localField": "app_id",
             "foreignField": "app_id",
             "as": "recommendations",
@@ -61,8 +61,11 @@ query_max_hours_played = [
         "$unwind": "$recommendations",
     },
     {
+        "$unwind": "$recommendations.recommendations",
+    },
+    {
         "$match": {
-            "recommendations.is_recommended": False,
+            "recommendations.recommendations.is_recommended": False,
         },
     },
     {
@@ -72,12 +75,12 @@ query_max_hours_played = [
                 "game_name": "$title",
             },
             "max_hours_played": {
-                "$max": "$recommendations.hours",
+                "$max": "$recommendations.recommendations.hours",
             },
             "users_with_max_hours": {
                 "$push": {
-                    "user_id": "$recommendations.user_id",
-                    "hours": "$recommendations.hours",
+                    "user_id": "$recommendations.recommendations.user_id",
+                    "hours": "$recommendations.recommendations.hours",
                 },
             },
         },
@@ -111,19 +114,32 @@ query_max_hours_played = [
     },
 ]
 
-
 # Query for Dedicated Fans of "Dota 2" Series
 query_dedicated_fans = [
     {
+        "$lookup": {
+            "from": "RecommendationsBucket",
+            "localField": "app_id",
+            "foreignField": "app_id",
+            "as": "recommendations_data",
+        },
+    },
+    {
+        "$unwind": "$recommendations_data",
+    },
+    {
+        "$unwind": "$recommendations_data.recommendations",
+    },
+    {
         "$match": {
-            "hours": {"$gt": 20},
-            "is_recommended": True,
-            "user_id": {"$mod": [10, 2]},
+            "recommendations_data.recommendations.hours": {"$gt": 20},
+            "recommendations_data.recommendations.is_recommended": True,
+            "recommendations_data.recommendations.user_id": {"$mod": [10, 2]},
         },
     },
     {
         "$lookup": {
-            "from": "Games",
+            "from": "GamesExtendedReference",
             "localField": "app_id",
             "foreignField": "app_id",
             "as": "game_info",
@@ -139,8 +155,8 @@ query_dedicated_fans = [
     },
     {
         "$group": {
-            "_id": "$user_id",
-            "max_hours_played": {"$max": "$hours"},
+            "_id": "$recommendations_data.recommendations.user_id",
+            "max_hours_played": {"$max": "$recommendations_data.recommendations.hours"},
         },
     },
     {
@@ -160,11 +176,12 @@ query_dedicated_fans = [
     },
 ]
 
+
 # Query for Percentage of "Very Positive" Rated Games
 query_very_positive_percentage = [
     {
         "$lookup": {
-            "from": "Price",
+            "from": "PriceSubset",
             "localField": "app_id",
             "foreignField": "app_id",
             "as": "price_info",
@@ -224,24 +241,33 @@ query_very_positive_percentage = [
 query_top_games_mac_linux = [
     {
         "$lookup": {
-            "from": "Platform",
+            "from": "PlatformSubset",
             "localField": "app_id",
             "foreignField": "app_id",
             "as": "platform",
         },
     },
     {
+        "$unwind": "$platform",
+    },
+    {
+        "$match": {
+            "platform.platforms": {"$all": ["Mac", "Linux"]},
+        },
+    },
+    {
         "$lookup": {
-            "from": "Price",
+            "from": "PriceSubset",
             "localField": "app_id",
             "foreignField": "app_id",
             "as": "price",
         },
     },
     {
+        "$unwind": "$price",
+    },
+    {
         "$match": {
-            "platform.mac": True,
-            "platform.linux": True,
             "price.price_final": {"$lt": 15},
         },
     },
@@ -251,7 +277,7 @@ query_top_games_mac_linux = [
             "app_id": 1,
             "title": 1,
             "user_reviews": 1,
-            "price_final": {"$arrayElemAt": ["$price.price_final", 0]},
+            "price_final": "$price.price_final",
         },
     },
     {
@@ -263,6 +289,7 @@ query_top_games_mac_linux = [
         "$limit": 10,
     },
 ]
+
 
 # MongoDB connection setup
 client = pymongo.MongoClient("mongodb://localhost:27017/")

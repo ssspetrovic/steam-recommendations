@@ -39,7 +39,7 @@ create_index('Games', [('app_id', pymongo.ASCENDING)])
 # Index creation for Percentage of "Very Positive" Rated Games
 create_index('Games', [('app_id', pymongo.ASCENDING)])
 # create_index('Price', [('app_id', pymongo.ASCENDING)])
-create_index('Games', [('rating', pymongo.ASCENDING)])
+# create_index('Games', [('rating', pymongo.ASCENDING)])
 
 # Index creation for Top 10 Most Popular Games on Mac and Linux with Price
 create_index('Platform', [('app_id', pymongo.ASCENDING)])

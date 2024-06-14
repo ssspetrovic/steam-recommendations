@@ -28,34 +28,32 @@ print('Starting index dropping for Funny Review Feedback')
 drop_index('ReviewFeedback', [('review_id', pymongo.ASCENDING)])
 drop_index('Games', [('app_id', pymongo.ASCENDING)])
 drop_index('Platform', [('app_id', pymongo.ASCENDING)])
-drop_index('Platform', [('steam_deck', pymongo.ASCENDING)])
+# drop_index('Platform', [('steam_deck', pymongo.ASCENDING)])
 
 # Index dropping for Max Hours Played by Users Who Did Not Recommend Games
 print('Starting index dropping for Max Hours Played by Users Who Did Not Recommend Games')
 drop_index('Games', [('app_id', pymongo.ASCENDING)])
-drop_index('Recommendations', [
-           ('app_id', pymongo.ASCENDING), ('is_recommended', pymongo.ASCENDING)])
-drop_index('Recommendations', [('hours', pymongo.DESCENDING)])
+# drop_index('Recommendations', [
+#            ('app_id', pymongo.ASCENDING), ('is_recommended', pymongo.ASCENDING)])
+# drop_index('Recommendations', [('hours', pymongo.DESCENDING)])
 
 # Index dropping for Dedicated Fans of "Goat Simulator" Series
 print('Starting index dropping for Dedicated Fans of "Goat Simulator" Series')
 drop_index('Recommendations', [('app_id', pymongo.ASCENDING)])
-drop_index('Recommendations', [
-           ('user_id', pymongo.ASCENDING), ('hours', pymongo.DESCENDING)])
+# drop_index('Recommendations', [
+#            ('user_id', pymongo.ASCENDING), ('hours', pymongo.DESCENDING)])
 drop_index('Games', [('app_id', pymongo.ASCENDING)])
-drop_index('Games', [('title', pymongo.ASCENDING)])
+# drop_index('Games', [('title', pymongo.ASCENDING)])
 
 # Index dropping for Percentage of "Very Positive" Rated Games
 print('Starting index dropping for Percentage of "Very Positive" Rated Games')
 drop_index('Games', [('app_id', pymongo.ASCENDING)])
-drop_index('Price', [('app_id', pymongo.ASCENDING)])
-drop_index('Games', [('rating', pymongo.ASCENDING)])
+# drop_index('Price', [('app_id', pymongo.ASCENDING)])
+# drop_index('Games', [('rating', pymongo.ASCENDING)])
 
 # Index dropping for Top 10 Most Popular Games on Mac and Linux with Price
 print('Starting index dropping for Top 10 Most Popular Games on Mac and Linux with Price')
 drop_index('Games', [('app_id', pymongo.ASCENDING)])
-drop_index('Platform', [('mac', pymongo.ASCENDING),
-           ('linux', pymongo.ASCENDING)])
 drop_index('Price', [('app_id', pymongo.ASCENDING)])
 
 client.close()

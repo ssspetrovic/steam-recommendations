@@ -6,7 +6,7 @@ import time
 query_funny_reviews = [
     {
         "$lookup": {
-            "from": "Games",
+            "from": "GamesExtendedReference",
             "localField": "review_id",
             "foreignField": "app_id",
             "as": "game_reviews",
@@ -17,7 +17,7 @@ query_funny_reviews = [
     },
     {
         "$lookup": {
-            "from": "Platform",
+            "from": "PlatformSubset",
             "localField": "game_reviews.app_id",
             "foreignField": "app_id",
             "as": "game_platform",
@@ -29,7 +29,7 @@ query_funny_reviews = [
     {
         "$match": {
             "game_reviews.positive_ratio": {"$gte": 80},
-            "game_platform.steam_deck": True,
+            "game_platform.platforms": "Steam Deck",
             "funny": {"$gt": 0},
         },
     },
@@ -51,7 +51,7 @@ query_funny_reviews = [
 query_max_hours_played = [
     {
         "$lookup": {
-            "from": "Recommendations",
+            "from": "RecommendationsBucket",
             "localField": "app_id",
             "foreignField": "app_id",
             "as": "recommendations",
@@ -61,8 +61,11 @@ query_max_hours_played = [
         "$unwind": "$recommendations",
     },
     {
+        "$unwind": "$recommendations.recommendations",
+    },
+    {
         "$match": {
-            "recommendations.is_recommended": False,
+            "recommendations.recommendations.is_recommended": False,
         },
     },
     {
@@ -72,12 +75,12 @@ query_max_hours_played = [
                 "game_name": "$title",
             },
             "max_hours_played": {
-                "$max": "$recommendations.hours",
+                "$max": "$recommendations.recommendations.hours",
             },
             "users_with_max_hours": {
                 "$push": {
-                    "user_id": "$recommendations.user_id",
-                    "hours": "$recommendations.hours",
+                    "user_id": "$recommendations.recommendations.user_id",
+                    "hours": "$recommendations.recommendations.hours",
                 },
             },
         },
@@ -110,7 +113,6 @@ query_max_hours_played = [
         "$limit": 5,
     },
 ]
-
 
 # Query for Dedicated Fans of "Dota 2" Series
 query_dedicated_fans = [
@@ -160,11 +162,12 @@ query_dedicated_fans = [
     },
 ]
 
+
 # Query for Percentage of "Very Positive" Rated Games
 query_very_positive_percentage = [
     {
         "$lookup": {
-            "from": "Price",
+            "from": "PriceSubset",
             "localField": "app_id",
             "foreignField": "app_id",
             "as": "price_info",
@@ -220,7 +223,7 @@ query_very_positive_percentage = [
 ]
 
 
-# Query for Top 10 Most Popular Games on Mac and Linux with Price
+# Query for Top 10 Most Popular Games on Mac and Linux with Price - already optimized
 query_top_games_mac_linux = [
     {
         "$lookup": {

@@ -35,7 +35,7 @@ def process_data(collection, data, transform_func, pattern):
     if transform_func:
         data_dict = [transform_func(record) for record in data_dict]
 
-    if pattern == "Attribute":
+    if pattern is None:
         collection.insert_many(data_dict)
     elif pattern == "Bucket":
         bulk_operations = []
@@ -142,16 +142,14 @@ def transform_user(row):
 
 
 def transform_game(row):
-    attributes = []
-    for key in ["positive_ratio", "user_reviews"]:
-        attributes.append({"key": key, "value": int(row[key])})
-
     return {
         "app_id": row["app_id"],
         "date_release": datetime.strptime(row["date_release"], '%Y-%m-%d'),
         "title": row["title"],
         "rating": row["rating"],
-        "attributes": attributes
+        "positive_ratio": int(row["positive_ratio"]),
+        "user_reviews": int(row["user_reviews"]),
+        "price": float(row["price_final"])
     }
 
 
@@ -175,10 +173,11 @@ def transform_review_feedback(row):
     }
 
 
-load_csv_to_mongodb('GamesAttribute', 'games.csv', transform_game, pattern="Attribute")
+load_csv_to_mongodb('GamesExtendedReference', 'games.csv', transform_game)
 load_csv_to_mongodb('PlatformSubset', 'games.csv', pattern="SubsetPlatform")
 load_csv_to_mongodb('PriceSubset', 'games.csv', pattern="SubsetPrice")
 load_csv_to_mongodb('Users', 'users.csv', transform_user)
 load_csv_to_mongodb('RecommendationsBucket', 'recommendations.csv',
-                    transform_recommendation, pattern="Bucket",  chunk_size=200000, row_limit=1000000)
-load_csv_to_mongodb('ReviewFeedbacksComputed', 'recommendations.csv', transform_review_feedback, pattern="Computed", chunk_size=200000, row_limit=1000000)
+                    transform_recommendation, pattern="Bucket", chunk_size=50000, row_limit=1000000)
+load_csv_to_mongodb('ReviewFeedbacksComputed', 'recommendations.csv',
+                    transform_review_feedback, pattern="Computed", chunk_size=200000, row_limit=1000000)

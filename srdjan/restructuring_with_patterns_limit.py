@@ -180,5 +180,5 @@ load_csv_to_mongodb('PlatformSubset', 'games.csv', pattern="SubsetPlatform")
 load_csv_to_mongodb('PriceSubset', 'games.csv', pattern="SubsetPrice")
 load_csv_to_mongodb('Users', 'users.csv', transform_user)
 load_csv_to_mongodb('RecommendationsBucket', 'recommendations.csv',
-                    transform_recommendation, pattern="Bucket",  chunk_size=200000, row_limit=2500000)
-load_csv_to_mongodb('ReviewFeedbacksComputed', 'recommendations.csv', transform_review_feedback, pattern="Computed", chunk_size=200000, row_limit=2500000)
+                    transform_recommendation, pattern="Bucket",  chunk_size=200000, row_limit=1000000)
+load_csv_to_mongodb('ReviewFeedbacksComputed', 'recommendations.csv', transform_review_feedback, pattern="Computed", chunk_size=200000, row_limit=1000000)

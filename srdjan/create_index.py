@@ -21,30 +21,28 @@ def create_index(collection, index):
 create_index('ReviewFeedback', [('review_id', pymongo.ASCENDING)])
 create_index('Games', [('app_id', pymongo.ASCENDING)])
 create_index('Platform', [('app_id', pymongo.ASCENDING)])
-create_index('Platform', [('steam_deck', pymongo.ASCENDING)])
+# create_index('Platform', [('steam_deck', pymongo.ASCENDING)])
 
 # Index creation for Max Hours Played by Users Who Did Not Recommend Games
 create_index('Games', [('app_id', pymongo.ASCENDING)])
-create_index('Recommendations', [
-             ('app_id', pymongo.ASCENDING), ('is_recommended', pymongo.ASCENDING)])
-create_index('Recommendations', [('hours', pymongo.DESCENDING)])
+# create_index('Recommendations', [
+#              ('app_id', pymongo.ASCENDING), ('is_recommended', pymongo.ASCENDING)])
+# create_index('Recommendations', [('hours', pymongo.DESCENDING)])
 
 # Index creation for Dedicated Fans of "Goat Simulator" Series
 create_index('Recommendations', [('app_id', pymongo.ASCENDING)])
-create_index('Recommendations', [
-             ('user_id', pymongo.ASCENDING), ('hours', pymongo.DESCENDING)])
+# create_index('Recommendations', [
+#              ('user_id', pymongo.ASCENDING), ('hours', pymongo.DESCENDING)])
 create_index('Games', [('app_id', pymongo.ASCENDING)])
-create_index('Games', [('title', pymongo.ASCENDING)])
+# create_index('Games', [('title', pymongo.ASCENDING)])
 
 # Index creation for Percentage of "Very Positive" Rated Games
 create_index('Games', [('app_id', pymongo.ASCENDING)])
-create_index('Price', [('app_id', pymongo.ASCENDING)])
+# create_index('Price', [('app_id', pymongo.ASCENDING)])
 create_index('Games', [('rating', pymongo.ASCENDING)])
 
 # Index creation for Top 10 Most Popular Games on Mac and Linux with Price
-create_index('Games', [('app_id', pymongo.ASCENDING)])
-create_index('Platform', [('mac', pymongo.ASCENDING),
-             ('linux', pymongo.ASCENDING)])
+create_index('Platform', [('app_id', pymongo.ASCENDING)])
 create_index('Price', [('app_id', pymongo.ASCENDING)])
 
 client.close()

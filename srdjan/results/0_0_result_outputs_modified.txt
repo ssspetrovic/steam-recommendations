@@ -1,19 +1,19 @@
 Running query for Funny Review Feedback...
-Query execution time: 0.25461721420288086 seconds
+Query execution time: 0.26097941398620605 seconds
 [{'_id': ObjectId('666c989cb678980ed027d9e2'), 'funny': 1253, 'review_id': 500, 'game_reviews': {'title': 'Left 4 Dead', 'positive_ratio': 96}}, {'_id': ObjectId('666c989cb678980ed027de56'), 'funny': 95, 'review_id': 1640, 'game_reviews': {'title': "Disciples II: Gallean's Return", 'positive_ratio': 81}}, {'_id': ObjectId('666c989cb678980ed027e0fe'), 'funny': 15, 'review_id': 2320, 'game_reviews': {'title': 'Quake II', 'positive_ratio': 94}}, {'_id': ObjectId('666c989cb678980ed027e126'), 'funny': 8, 'review_id': 2360, 'game_reviews': {'title': 'Hexen: Beyond Heretic', 'positive_ratio': 88}}, {'_id': ObjectId('666c989cb678980ed027e536'), 'funny': 2, 'review_id': 3400, 'game_reviews': {'title': 'Hammer Heads Deluxe', 'positive_ratio': 90}}]
 
 Running query for Max Hours Played by Users Who Did Not Recommend Games...
-Query execution time: 4.178679943084717 seconds
-[{'max_hours_played': 999.9, 'game_id': 570, 'game_name': 'Dota 2', 'user_id': 10263359}, {'max_hours_played': 999.9, 'game_id': 377160, 'game_name': 'Fallout 4', 'user_id': 11834030}, {'max_hours_played': 999.9, 'game_id': 386360, 'game_name': 'SMITE®', 'user_id': 9932417}, {'max_hours_played': 999.9, 'game_id': 381210, 'game_name': 'Dead by Daylight', 'user_id': 13826219}, {'max_hours_played': 999.8, 'game_id': 438100, 'game_name': 'VRChat', 'user_id': 2040088}]
+Query execution time: 3.8228328227996826 seconds
+[{'max_hours_played': 999.9, 'game_id': 386360, 'game_name': 'SMITE®', 'user_id': 9932417}, {'max_hours_played': 999.9, 'game_id': 381210, 'game_name': 'Dead by Daylight', 'user_id': 13826219}, {'max_hours_played': 999.9, 'game_id': 570, 'game_name': 'Dota 2', 'user_id': 10263359}, {'max_hours_played': 999.9, 'game_id': 377160, 'game_name': 'Fallout 4', 'user_id': 11834030}, {'max_hours_played': 999.8, 'game_id': 438100, 'game_name': 'VRChat', 'user_id': 2040088}]
 
-Running query for Dedicated Fans of 'Goat Simulator' Series...
-Query execution time: 6.787014484405518 seconds
+Running query for Dedicated Fans of 'Dota 2' Series...
+Query execution time: 5.683590412139893 seconds
 [{'max_hours_played': 999.8, 'user_id': 10330952}, {'max_hours_played': 998.4, 'user_id': 5528372}, {'max_hours_played': 995.5, 'user_id': 1017772}, {'max_hours_played': 991.9, 'user_id': 6022732}, {'max_hours_played': 989.4, 'user_id': 5350942}, {'max_hours_played': 985.6, 'user_id': 4917322}, {'max_hours_played': 981.5, 'user_id': 10893502}, {'max_hours_played': 978.7, 'user_id': 13811782}, {'max_hours_played': 977.2, 'user_id': 1580162}, {'max_hours_played': 974.0, 'user_id': 3734122}]
 
 Running query for Percentage of 'Very Positive' Rated Games...
-Query execution time: 3.225346565246582 seconds
+Query execution time: 3.442131519317627 seconds
 [{'rating': 'Very Positive', 'percentage': 25.8275672275515, 'average_price': 10.183091559479411, 'average_reviews': 4082.434431844128}]
 
 Running query for Top 10 Most Popular Games on Mac and Linux with Price...
-Query execution time: 0.9972405433654785 seconds
+Query execution time: 1.079955816268921 seconds
 [{'app_id': 570, 'title': 'Dota 2', 'user_reviews': 2045628, 'price_final': 0.0}, {'app_id': 440, 'title': 'Team Fortress 2', 'user_reviews': 985819, 'price_final': 0.0}, {'app_id': 105600, 'title': 'Terraria', 'user_reviews': 943413, 'price_final': 10.0}, {'app_id': 4000, 'title': "Garry's Mod", 'user_reviews': 853733, 'price_final': 10.0}, {'app_id': 550, 'title': 'Left 4 Dead 2', 'user_reviews': 574470, 'price_final': 10.0}, {'app_id': 304930, 'title': 'Unturned', 'user_reviews': 515016, 'price_final': 0.0}, {'app_id': 236390, 'title': 'War Thunder', 'user_reviews': 393681, 'price_final': 0.0}, {'app_id': 620, 'title': 'Portal 2', 'user_reviews': 293053, 'price_final': 10.0}, {'app_id': 289070, 'title': 'Sid Meier’s Civilization® VI', 'user_reviews': 201288, 'price_final': 6.0}, {'app_id': 1281930, 'title': 'tModLoader', 'user_reviews': 188684, 'price_final': 0.0}]

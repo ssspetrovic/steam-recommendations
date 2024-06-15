@@ -4,6 +4,7 @@
   <img src="mongodb_logo.png" height="100">
   <img src="steam_logo.png" height="100" style="margin-left:30px;">
 </div>
+
 ## Overview
 
 This project focuses on the analysis and optimization of the [Game Recommendations on Steam dataset](https://www.kaggle.com/datasets/antonkozyriev/game-recommendations-on-steam?select=games.csv) sourced from Kaggle. The dataset provides comprehensive information about games available on the Steam platform, including user reviews, ratings, pricing, and platform compatibility.

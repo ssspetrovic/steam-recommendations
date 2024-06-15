@@ -2,7 +2,7 @@ import pymongo
 import time
 
 
-# Query for Funny Review Feedback
+# Pronalazi recenzije koje su označene kao smešne za igre sa visokim pozitivnim rejtingom na Steam Deck platformi.
 query_funny_reviews = [
     {
         "$lookup": {
@@ -47,7 +47,7 @@ query_funny_reviews = [
 ]
 
 
-# Query for Max Hours Played by Users Who Did Not Recommend Games
+# Pronalazi maksimalan broj sati koje su korisnici igrali igre za koje nisu preporučili, grupišući ih po igrama.
 query_max_hours_played = [
     {
         "$lookup": {
@@ -114,7 +114,7 @@ query_max_hours_played = [
     },
 ]
 
-# Query for Dedicated Fans of "Dota 2" Series
+# Pronalazi najveće fanove "Dota 2" igre na osnovu maksimalnog broja sati koje su igrali.
 query_dedicated_fans = [
     {
         "$match": {
@@ -163,7 +163,7 @@ query_dedicated_fans = [
 ]
 
 
-# Query for Percentage of "Very Positive" Rated Games
+# Računa procenat igara koje imaju vrlo pozitivan rejting, uz prosečnu cenu i prosečne korisničke recenzije.
 query_very_positive_percentage = [
     {
         "$lookup": {
@@ -223,7 +223,7 @@ query_very_positive_percentage = [
 ]
 
 
-# Query for Top 10 Most Popular Games on Mac and Linux with Price - already optimized
+# Pronalazi najpopularnije igre na platformama Mac i Linux sa cenom manjom od 15 dolara, sortirane po broju korisničkih recenzija.
 query_top_games_mac_linux = [
     {
         "$lookup": {

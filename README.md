@@ -40,14 +40,6 @@ The dataset consists of CSV files containing information such as game details, u
 - **Extended Reference**: Linked additional game details across different collections for efficient querying.
 - **Computing Pattern**: Created computed fields such as final price with applied discounts.
 
-### Indexing Strategy
-
-- Indexes were created on fields frequently used in queries to optimize query execution speed.
-- Examples include:
-  - `Games`: Index on `app_id` for fast game lookups.
-  - `Platform`: Compound index on `mac` and `linux` for platform-specific queries.
-  - `Price`: Index on `app_id` for pricing-related queries.
-
 ## Conclusion
 
 This project showcases MongoDB's capabilities in optimizing storage and retrieval of data from the Steam game recommendations dataset. By utilizing indexing, design patterns, and efficient querying techniques, the database performance is enhanced, facilitating quicker analysis and extraction of valuable insights.

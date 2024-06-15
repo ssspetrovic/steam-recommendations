@@ -1,6 +1,8 @@
 # Game Recommendations on Steam Dataset Analysis and Optimization
-
-![Steam Logo](steam_logo.png)
+<div style="text-align:center;">
+  <img src="path_to_resized_steam_logo.png" width="100" height="100" style="display:inline-block; margin-right:20px;">
+  <img src="mongodb_logo.png" width="100"style="display:inline-block;">
+</div>
 
 ## Overview
 
